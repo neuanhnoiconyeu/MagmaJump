@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#172943"><meta name="description" content="Climb fast. Stay above the magma. A tiny multiplayer arcade game.">
+  <title>MagmaJump — One more floor.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=2">
+</head>
+<body>
+  <main id="app">
+    <section class="screen home-screen active" id="homeScreen">
+      <div class="masthead"><span class="masthead-mark"><i></i><i></i><i></i></span> LITTLE BIG ARCADE <span class="online-dot"></span></div>
+      <div class="home-layout">
+        <div class="hero">
+          <div class="eyebrow"><span class="eyebrow-line"></span> A VERY HOT CLIMB <span class="eyebrow-line"></span></div>
+          <h1>MAGMA<br><span>JUMP</span><small>®</small></h1>
+          <p class="hero-copy">One more floor. Then one more.<br>Try not to become toast.</p>
+          <div class="tower-preview" aria-hidden="true"><div class="preview-stars">✦　 ·　 ✦</div><div class="preview-tower"><div class="preview-window"></div><div class="preview-window w2"></div><div class="preview-player">▟</div><div class="preview-blocks"></div></div><div class="preview-lava"><div class="lava-tongue"></div></div></div>
+        </div>
+        <div class="entry-card">
+          <div class="card-topline"><span>READY, PILOT?</span><span class="card-coord">MJ—001</span></div>
+          <label class="field-label" for="username">YOUR CALLSIGN</label>
+          <input id="username" class="text-field" maxlength="14" autocomplete="nickname" placeholder="e.g. little comet" value="">
+          <button id="createBtn" class="arcade-button primary"><span>CREATE A ROOM</span><span class="button-arrow">↗</span></button>
+          <div class="or-row"><span></span> OR DROP INTO ONE <span></span></div>
+          <label class="field-label" for="roomCode">ROOM CODE <span class="label-note">4 LETTERS</span></label>
+          <div class="join-row"><input id="roomCode" class="text-field code-field" maxlength="4" autocomplete="off" placeholder="ABCD" aria-label="Room code"><button id="joinBtn" class="arcade-button secondary">JOIN ROOM <span>→</span></button></div>
+          <p id="formError" class="form-error" role="alert"></p>
+          <div class="card-foot"><span>⌁ UP TO 8 PILOTS</span><span>⌁ FREE TO PLAY</span></div>
+        </div>
+      </div>
+      <div class="home-footer"><span>AN UNNECESSARILY INTENSE ELEVATOR RIDE</span><span>↑ SPACE / TAP TO FLAP</span></div>
+    </section>
+
+    <section class="screen room-screen" id="roomScreen">
+      <header class="room-top"><button class="wordmark" id="leaveBtn"><span class="mini-mark">▰</span> MAGMA<span>JUMP</span></button><div class="room-pill"><span class="online-dot"></span> ROOM <b id="roomCodeLabel">----</b></div></header>
+      <div class="room-layout"><div class="room-intro"><div class="eyebrow left"><span class="eyebrow-line"></span> PRE-FLIGHT CHECK</div><h2 id="roomHeading">The tower<br>is waiting.</h2><p>Get your crew together.<br>There’s no elevator up.</p><div class="room-skyline" aria-hidden="true"><div></div><div></div><div></div><div></div><i class="skyline-moon"></i></div></div>
+        <div class="players-card"><div class="players-head"><div><span class="section-kicker">THE CREW</span><h3>Who's climbing?</h3></div><div class="player-count"><b id="playerCount">1</b><span>/ 8</span></div></div><div class="player-list" id="playerList"></div><div class="invite-box"><div><span class="section-kicker">SEND THE CODE</span><p>Your friends can join from any device.</p></div><button class="copy-code" id="copyCode"><b id="copyCodeText">----</b><span id="copyLabel">COPY</span></button></div><div class="lobby-actions"><button id="readyBtn" class="arcade-button secondary ready-button">I'M READY <span>✓</span></button><button id="startBtn" class="arcade-button primary start-button">START CLIMB <span>↗</span></button></div><p class="lobby-hint" id="lobbyHint">Waiting for your crew...</p></div>
+      </div>
+    </section>
+
+    <section class="screen game-screen" id="gameScreen"><canvas id="gameCanvas" aria-label="MagmaJump tower game"></canvas><div class="game-vignette"></div>
+      <div class="game-hud"><button class="hud-logo" id="gameLeave">MJ<span>.</span></button><div class="height-counter"><span>YOUR ALTITUDE</span><b><i id="heightValue">000</i><small> m</small></b></div><div class="hud-room">ROOM <b id="gameRoomCode">----</b></div></div>
+      <div class="round-countdown hidden" id="roundCountdown"><span>GET READY</span><b id="countdownValue">8</b><small>THE CLIMB STARTS IN</small></div>
+      <div class="leaderboard" id="leaderboard"><div class="leaderboard-title"><span class="live-pulse"></span> FLIGHT DECK <span id="aliveCount">0/8</span></div><div id="leaderboardRows"></div></div>
+      <div class="climb-tip" id="climbTip"><span>↑</span> TAP TO FLAP <i>·</i> STEER TO DODGE <b>← →</b></div>
+      <div class="game-over-card hidden" id="gameOverCard"><div class="over-stars">✦　✦　✦</div><span class="section-kicker" id="overKicker">FLIGHT LOG</span><h2 id="overTitle">TOASTED.</h2><p id="overCopy">Every great climb ends somewhere.</p><div class="final-score"><span>YOUR BEST ALTITUDE</span><b id="finalHeight">000 m</b></div><div class="result-rank" id="resultRank"></div><button class="arcade-button primary" id="backLobby">BACK TO LOBBY <span>↗</span></button></div>
+      <div class="tutorial-backdrop hidden" id="tutorial"><div class="tutorial-card"><span class="tutorial-tag">FIRST TIME UP?</span><div class="tutorial-icon">↑</div><h2>THE TOWER<br>IS A TRAP.</h2><div class="tutorial-steps"><p><b>01</b><span>Tap screen / press <kbd>SPACE</kbd> to flap upwards.</span></p><p><b>02</b><span>Climb as high as you can.</span></p><p><b>03</b><span>Dodge pixel spikes. Stay above the rising lava.</span></p></div><button class="arcade-button primary" id="gotIt">GOT IT — PLAY <span>→</span></button><small>You can steer with ← → or A / D.</small></div></div>
+    </section>
+    <div class="toast" id="toast"></div>
+  </main>
+  <script src="/game.js?v=13" defer></script>
+</body>
+</html>
